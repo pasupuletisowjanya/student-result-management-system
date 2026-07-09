@@ -1,0 +1,101 @@
+import csv
+import os
+
+FILE_NAME = "students.csv"
+
+
+# Create CSV file if it doesn't exist
+if not os.path.exists(FILE_NAME):
+    with open(FILE_NAME, "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "ID", "Name", "Maths", "Science", "English",
+            "Total", "Percentage", "Result"
+        ])
+
+
+def add_student():
+    sid = input("Enter Student ID: ")
+    name = input("Enter Student Name: ")
+
+    maths = int(input("Maths Marks: "))
+    science = int(input("Science Marks: "))
+    english = int(input("English Marks: "))
+
+    total = maths + science + english
+    percentage = total / 3
+
+    if maths >= 35 and science >= 35 and english >= 35:
+        result = "Pass"
+    else:
+        result = "Fail"
+
+    with open(FILE_NAME, "a", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            sid, name, maths, science,
+            english, total,
+            round(percentage, 2),
+            result
+        ])
+
+    print("\nStudent Added Successfully!\n")
+
+
+def view_students():
+    with open(FILE_NAME, "r") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            print(row)
+
+
+def search_student():
+    sid = input("Enter Student ID: ")
+
+    found = False
+
+    with open(FILE_NAME, "r") as file:
+        reader = csv.reader(file)
+
+        for row in reader:
+            if len(row) > 0 and row[0] == sid:
+                print("\nStudent Record")
+                print("--------------------------")
+                print("ID:", row[0])
+                print("Name:", row[1])
+                print("Maths:", row[2])
+                print("Science:", row[3])
+                print("English:", row[4])
+                print("Total:", row[5])
+                print("Percentage:", row[6])
+                print("Result:", row[7])
+                found = True
+
+    if not found:
+        print("Student Not Found.")
+
+
+while True:
+    print("\n===== Student Result Management System =====")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Search Student")
+    print("4. Exit")
+
+    choice = input("Enter Choice: ")
+
+    if choice == "1":
+        add_student()
+
+    elif choice == "2":
+        view_students()
+
+    elif choice == "3":
+        search_student()
+
+    elif choice == "4":
+        print("Thank You!")
+        break
+
+    else:
+        print("Invalid Choice")
