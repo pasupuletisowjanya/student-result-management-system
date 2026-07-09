@@ -1,0 +1,22 @@
+===== Student Result Management System =====
+1. Add Student
+2. View Students
+3. Search Student
+4. Exit
+Enter Choice: 1
+Enter Student ID: 25
+Enter Student Name: ravi
+Maths Marks: 50
+Science Marks: 70
+English Marks: 65
+
+Student Added Successfully!
+
+
+===== Student Result Management System =====
+1. Add Student
+2. View Students
+3. Search Student
+4. Exit
+Enter Choice: 4
+Thank You!
